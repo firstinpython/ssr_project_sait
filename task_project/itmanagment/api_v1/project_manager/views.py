@@ -1,9 +1,4 @@
-from django.shortcuts import render
-from users.models import UsersModel
-from projects.models import ProjectsModel
-from .serializer import UsersSerializer, CreateProjectSerializer
-from rest_framework.generics import CreateAPIView
-from rest_framework.views import APIView
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .decorators import pm

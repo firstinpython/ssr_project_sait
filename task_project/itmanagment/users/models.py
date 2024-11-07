@@ -12,7 +12,10 @@ class UsersModel(AbstractUser):
     profession_category = models.ForeignKey(to="ProfessionCategoryModel",on_delete=models.CASCADE,null=True)
     dev_stack = models.ForeignKey(to='DevStackModel',on_delete=models.CASCADE,null=True)
     avatar = models.FileField(upload_to="avatar_user",null=True)
-    projects = models.ForeignKey(to=ProjectsModel,on_delete=models.CASCADE,null=True)
+    projects = models.ManyToManyField(to=ProjectsModel)
+    create_projects = models.BooleanField(default=True)
+
+
 
 class DevStackModel(models.Model):
     user_stack = models.CharField(verbose_name="user_stack",max_length=120)
