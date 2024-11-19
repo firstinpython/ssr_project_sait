@@ -15,7 +15,7 @@ from projects.models import StatusModel
 # from ..tasks.models import TaskModel
 
 
-# Create your views here.
+# Create your view here.
 class UserRegistr(CreateAPIView):
     queryset = UsersModel
     serializer_class = UserRegistrSerializer

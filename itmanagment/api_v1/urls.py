@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import UserRegistr, createpost, userprofile, list_projects, create_project, retrieve_project, \
-    delete_project, archival_projects, active_projects, create_user
+from .views import UserRegistr, createpost, userprofile, list_projects, retrieve_project, \
+    delete_project, archival_projects, active_projects
+from .view.user.views import create_user,list_user
+from .view.project.views import create_project
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -8,9 +10,9 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
-    path("users", UserRegistr.as_view()),
-    path("create_user", create_user),
-    path("projects", createpost),
+    path("users", list_user),
+    path("create_user", createpost),
+    path("projects", create_project),
     path("archival_projects", archival_projects),
     path("active_projects", active_projects),
     path("profile", userprofile),

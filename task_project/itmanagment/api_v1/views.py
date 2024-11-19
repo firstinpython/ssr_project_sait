@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from projects.models import StatusModel
 
 
-# Create your views here.
+# Create your view here.
 class UserRegistr(CreateAPIView):
     queryset = UsersModel
     serializer_class = UserSerializer
