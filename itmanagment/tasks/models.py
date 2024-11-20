@@ -31,3 +31,12 @@ class PriorityTaskModel(models.Model):
 
     def __str__(self):
         return f"{self.name_priority}"
+
+
+class Comments(models.Model):
+    username = models.ForeignKey(verbose_name="username", to=UsersModel, on_delete=models.CASCADE)
+    description = models.TextField(verbose_name="description")
+    datetime = models.DateTimeField(verbose_name='data',auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.username} | {self.datetime}"
