@@ -21,8 +21,8 @@ class UsersModel(AbstractUser):
         else:
             self.create_projects = False
 
-    def __str__(self):
-        return f"{self.username}{self.create_projects}"
+    # def __str__(self):
+    #     return f"{self.username}{self.create_projects}{self.pk}"
 
 
 class DevStackModel(models.Model):
