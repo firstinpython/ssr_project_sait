@@ -1,7 +1,8 @@
 from django.urls import path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from .view.user.views import create_user,list_user
-from .view.project.views import create_project, add_people_in_project, list_projects, delete_projects
+from .view.project.views import create_project, add_people_in_project, list_projects, delete_projects,html_addprojects
 from .view.tasks.views import create_tasks,list_tasks,delete_task
 # from rest_framework_simplejwt.views import (
 #     TokenObtainPairView,
@@ -28,7 +29,12 @@ urlpatterns = [
     path("<int:project_id>/<int:task_id>/delete/", delete_task),
     path("<int:project_id>/addproject/",add_people_in_project),
     path("list_projects/",list_projects),
-    path('<int:project_id>/delete',delete_projects)
+    path('<int:project_id>/delete',delete_projects),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path("html/addproject/",html_addprojects)
 
 
     # path("projects"),

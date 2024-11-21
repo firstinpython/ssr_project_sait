@@ -1,5 +1,5 @@
 """
-ASGI config for itmanagment project.
+ASGI config for api_v1 project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

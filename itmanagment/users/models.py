@@ -8,9 +8,9 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 class UsersModel(AbstractUser):
-    age = models.IntegerField(verbose_name="age", validators=[MinValueValidator(0)])
-    role = models.ForeignKey(to="RoleModel", on_delete=models.CASCADE)
-    profession_category = models.ForeignKey(to="ProfessionCategoryModel", on_delete=models.CASCADE)
+    age = models.IntegerField(verbose_name="age", validators=[MinValueValidator(0)],null=True)
+    role = models.ForeignKey(to="RoleModel", on_delete=models.CASCADE,null=True)
+    profession_category = models.ForeignKey(to="ProfessionCategoryModel", on_delete=models.CASCADE,null=True)
     dev_stack = models.ManyToManyField(to='DevStackModel', null=True)
     avatar = models.FileField(upload_to="avatar_user", null=True)
     create_projects = models.BooleanField(default=True)

@@ -51,3 +51,5 @@ def delete_task(request,project_id:int,task_id:int) -> Response:
     task = TaskModel.objects.filter(pk=task_id,project=project_model, executor=user).first()
     task.delete()
     return Response({"message":"delete item"})
+
+

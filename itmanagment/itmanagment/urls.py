@@ -1,5 +1,5 @@
 """
-URL configuration for itmanagment project.
+URL configuration for api_v1 project.
 
 The `urlpatterns` list routes URLs to view. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
