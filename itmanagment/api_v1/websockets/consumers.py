@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from six import text_type
+
 
 
 class ChatConsumer(AsyncWebsocketConsumer):

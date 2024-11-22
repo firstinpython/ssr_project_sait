@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "projects.apps.ProjectsConfig",
     "rest_framework",
+    "django_filters",
     "tasks",
     "api_v1",
 
@@ -138,7 +139,10 @@ REST_FRAMEWORK = {
     #     'rest_framework.authentication.SessionAuthentication'    )
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 
 }
 

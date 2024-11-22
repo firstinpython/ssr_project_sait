@@ -3,7 +3,7 @@ from channels.layers import get_channel_layer
 from django.core.mail import send_mail
 from django.shortcuts import render
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from websocket import create_connection
+
 from projects.models import ProjectsModel
 
 from .serializers import ProjectsSerializer,ListProjectsSerializer
@@ -11,15 +11,23 @@ from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required, login_not_required
 from users.models import UsersModel
-import requests
+
+# from django_filters import rest_framework as filters
+from .fielter import filters
 
 
 
 @api_view(['GET'])
 def list_projects(request):
-    if request.user.is_authenticated:
-        projects = ProjectsModel.objects.all()
-        serializer = ListProjectsSerializer(projects,many=True)
+    # if request.user.is_authenticated:
+        param = request.GET
+        # print(param)
+        resp = filters(param)
+        serializer = ListProjectsSerializer(resp, many=True)
+        # filter_backends = (filters.DjangoFilterBackend,)
+        # filterset_class = ProjectFilter
+        # filtered_data = ProjectsModel.objects.filter(filterset_class)
+        # serializer =  ListProjectsSerializer(filtered_data,many=True)
         return Response(serializer.data)
 @api_view(['POST'])
 def create_project(request):
@@ -81,6 +89,4 @@ def delete_projects(request,project_id:int):
 
 def html_addprojects(request):
     if request.method == 'GET':
-        context = requests.get("http://127.0.0.1:8000/api/v1/1/addproject/")
-        print(context)
         return render(request,'api_v1/index.html')
