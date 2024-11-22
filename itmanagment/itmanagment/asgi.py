@@ -1,5 +1,5 @@
 """
-ASGI config for itmanagment project.
+ASGI config for api_v1 project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -8,9 +8,18 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
 """
 
 import os
-
 from django.core.asgi import get_asgi_application
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+from api_v1.websockets import routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'itmanagment.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
 
-application = get_asgi_application()
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": AuthMiddlewareStack(
+        URLRouter(
+            routing.websocket_urlpatterns
+        )
+    ),
+})

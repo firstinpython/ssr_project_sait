@@ -16,8 +16,27 @@ class TaskModel(models.Model):
     resp_for_testing = models.ForeignKey(to=UsersModel,on_delete=models.CASCADE,related_name="resp_task")
 
 
+    def __str__(self):
+        return f"{self.name_task} | {self.executor}"
+
+
 class StatusTaskModel(models.Model):
     name_status = models.CharField(verbose_name="name_status",max_length=120)
 
+    def __str__(self):
+        return f"{self.name_status}"
+
 class PriorityTaskModel(models.Model):
     name_priority = models.CharField(verbose_name="name_priority",max_length=120)
+
+    def __str__(self):
+        return f"{self.name_priority}"
+
+
+class Comments(models.Model):
+    username = models.ForeignKey(verbose_name="username", to=UsersModel, on_delete=models.CASCADE)
+    description = models.TextField(verbose_name="description")
+    datetime = models.DateTimeField(verbose_name='data',auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.username} | {self.datetime}"
