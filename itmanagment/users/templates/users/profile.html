@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/profile-page.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="page-container">
+        <div class="menu">
+            <div class="menu-logo">
+                <img src="./assets/svg/logo.png" alt="" class="menu-logo-svg">
+            </div>
+            <div class="menu-buttons">
+                <nav class="menu-buttons-links">
+                    <li class="menu-buttons-link">Clients</li>
+                    <li class="menu-buttons-link">Task manager</li>
+                    <li class="menu-buttons-link">Inbox</li>
+                    <li class="menu-buttons-link">Contacts</li>
+                    <li class="menu-buttons-link"></li>
+                </nav>
+            </div>
+        </div>
+        <div class="page">
+            <header class="page-header">
+                <div class="page-header-container">
+                    <nav class="page-header-menu">
+                        <div class="page-header-search">
+                            <img src="" alt="" class="page-header-searchlogo">
+                            <input type="text" class="page-header-searchinput">
+                        </div>
+                        <div class="page-header-buttons">
+                            <button><img src="./assets//svg/bell.svg" alt="bell" class="page-header-search-bell"></button>
+                            <button><img src="./assets/svg/convert.svg" alt="convert" class="page-header-search-convert"></button>
+                        </div>
+                        <div class="page-header-profile">
+                            <p id="profile-name">Tagir</p>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <main class="profile-main">
+                <div class="profile-main-name" id="profile-main-name">
+                    Tagir
+                </div>
+                <div class="profile-main-blocks-container">
+                    <div class="profile-main-peoplestat-container">
+                        <div class="profile-main-photo">
+                            <img src="./assets/svg/logo-profile.png" alt="">
+                        </div>
+                        <div class="profile-main-proff">
+                            <div class="profile-main-text">
+                                <span>Position</span>
+                                <span id="profile_stack">Ux UI Designer</span>
+                            </div>
+                            <div class="profile-main-text">
+                                <span>Email:</span>
+                                <span id="profile_email">ntr.0707@mail.ru</span>
+                            </div>
+                            <div class="profile-main-text">
+                                <span>Telegram ID:</span><span>70894224</span>
+                            </div>
+                        </div>
+                        <div class="profile-main-proff">
+                            <div class="profile-main-text">
+                                <span>Hours worked this month:</span>
+                                <span>30</span>
+                            </div>
+                            <div class="profile-main-text">
+                                <span>Email:</span>
+                                <span id="profile-email">ntr.0707@mail.ru</span>
+                            </div>
+                            <div class="profile-main-text">
+                                <span>Telegram ID:</span><span>70894224</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-main-projects-container">
+                        <div class="profile-main-projects">
+                            <div class="profile-main-projects-title">
+                                Projects
+                            </div>
+                            <div class="profile-main-projects-block" id="profile-main-projects-block">
+                                <!-- Projects will be inserted here -->
+                            </div>
+                        </div>
+                        <div class="profile-main-clpr-projects">
+                            <div class="profile-main-progresproject">
+                                <div class="profile-main-progresproject-title">
+                                    In progress
+                                </div>
+                                <div class="profile-main-progresproject-block" id="profile-main-progresproject-block">
+                                    <!-- In progress projects will be inserted here -->
+                                </div>
+                            </div>
+                            <div class="profile-main-closeproject">
+                                <div class="profile-main-closeproject-ttitle">
+                                    Close project
+                                </div>
+                                <div class="profile-main-closeproject-block" id="profile-main-closeproject-block">
+                                    <!-- Close projects will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        async function fetchProfileData() {
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyNDk1Mjk3LCJpYXQiOjE3MzI0OTM0OTcsImp0aSI6IjM4ZGEzN2FkODM0MzQxNmZiYTA2N2Y3OTA1NWVmYjE1IiwidXNlcl9pZCI6MX0.PTj1oAs_Avf5wvP6D7ndoyYkzOiwDUOVivlYbnucI7c'; // Замените на ваш токен
+            const response = await fetch('http://127.0.0.1:8000/api/v1/profile', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            const userProfile = data.user_profile;
+            const projects = data.projects;
+
+            // Обновляем данные профиля
+            document.getElementById('profile-name').innerText = userProfile.username;
+            document.getElementById('profile-main-name').innerText = userProfile.username;
+            document.getElementById('profile_stack').innerText = userProfile.profession_category.name_prof_category;
+            document.getElementById('profile_email').innerText = userProfile.email;
+
+            // Обновляем данные проектов
+            const projectsContainer = document.getElementById('profile-main-projects-block');
+            const inProgressContainer = document.getElementById('profile-main-progresproject-block');
+            const closeProjectContainer = document.getElementById('profile-main-closeproject-block');
+
+            projects.forEach(project => {
+                const projectItem = document.createElement('div');
+                projectItem.className = 'profile-main-projects-item';
+                projectItem.innerHTML = `
+                    <p class="profile-main-projects-item-title">${project.name_project}</p>
+                    <p class="profile-main-projects-item-on">${project.date_of_creation}</p>
+                    <p class="profile-main-projects-item-off">${project.status.name_status}</p>
+                    <p class="profile-main-projects-item-persons">${userProfile.username}</p>
+                `;
+                projectsContainer.appendChild(projectItem);
+
+                // Добавляем проекты в соответствующие блоки
+                if (project.status.name_status === 'In progres') {
+                    const inProgressItem = document.createElement('div');
+                    inProgressItem.className = 'profile-main-progresproject-item';
+                    inProgressItem.innerHTML = `
+                        <div class="profile-main-progresproject-titlelabel">
+                            <p class="profile-main-progresproject-title">${project.name_project}</p>
+                            <p class="profile-main-progresproject-status">${project.status.name_status}</p>
+                        </div>
+                        <div class="profile-main-progresproject-contentblock">
+                            <div class="profile-main-progresproject-particants">
+                                <p class="profile-main-progresproject-particlabel">Participant:</p>
+                                <p class="profile-main-progresproject-particpeople">${userProfile.username}</p>
+                            </div>
+                            <div class="profile-main-progresproject-dateadd">
+                                <p class="profile-main-progresproject-datelabel">Date added:</p>
+                                <p class="profile-main-progresproject-date">${project.date_of_creation}</p>
+                            </div>
+                        </div>
+                    `;
+                    inProgressContainer.appendChild(inProgressItem);
+                } else if (project.status.name_status === 'Close project') {
+                    const closeProjectItem = document.createElement('div');
+                    closeProjectItem.className = 'profile-main-closeproject-item';
+                    closeProjectItem.innerHTML = `
+                        <div class="profile-main-closeproject-titlelabel">
+                            <p class="profile-main-closeproject-title">${project.name_project}</p>
+                            <p class="profile-main-closeproject-status">${project.status.name_status}</p>
+                        </div>
+                        <div class="profile-main-closeproject-contentblock">
+                            <div class="profile-main-closeproject-particants">
+                                <p class="profile-main-closeproject-particlabel">Participant:</p>
+                                <p class="profile-main-closeproject-particpeople">${userProfile.username}</p>
+                            </div>
+                            <div class="profile-main-closeproject-dateadd">
+                                <p class="profile-main-closeproject-datelabel">Date added:</p>
+                                <p class="profile-main-closeproject-date">${project.date_of_creation}</p>
+                            </div>
+                        </div>
+                    `;
+                    closeProjectContainer.appendChild(closeProjectItem);
+                }
+            });
+        }
+
+        fetchProfileData().catch(error => console.error('Error fetching profile data:', error));
+    </script>
+</body>
+</html>

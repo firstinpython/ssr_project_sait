@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button, input[type=submit], input[type=reset] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+
+.main-page-title {
+  padding-left: 880px;
+  padding-top: 80px;
+}
+.main-page-form {
+  display: flex;
+  flex-direction: column;
+  padding-left: 343px;
+  padding-right: 343px;
+  margin-top: 100px;
+}
+.main-page-form-username {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  margin-left: 370px;
+  padding-left: 10px;
+}
+.main-page-form-password {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  margin-left: 370px;
+  margin-top: 45px;
+  padding-left: 10px;
+}
+.main-page-form-firstlast-name {
+  display: flex;
+  flex-direction: row;
+  gap: 286px;
+  padding-top: 45px;
+}
+.main-page-form-firstname {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  padding-left: 10px;
+}
+.main-page-form-lastname {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  padding-left: 10px;
+}
+.main-page-form-emailage-name {
+  display: flex;
+  flex-direction: row;
+  gap: 286px;
+  padding-top: 45px;
+}
+.main-page-form-email {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  padding-left: 10px;
+}
+.main-page-form-age {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  padding-left: 10px;
+}
+.main-page-form-rolecat-name {
+  display: flex;
+  flex-direction: row;
+  gap: 286px;
+  padding-top: 45px;
+}
+.main-page-form-role {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  padding-left: 10px;
+}
+.main-page-form-category {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+  padding-left: 10px;
+}
+.main-page-form-stackavatar-name {
+  display: flex;
+  flex-direction: row;
+  gap: 286px;
+  padding-top: 45px;
+}
+.main-page-form-stack {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+}
+.main-page-form-avatar {
+  width: 483px;
+  height: 63px;
+  border-radius: 17px;
+}
+.main-page-form-button {
+  width: 326px;
+  height: 71px;
+  border-radius: 17px;
+  background-color: #FD633D;
+  margin-left: 450px;
+  margin-top: 10px;
+}

@@ -1,0 +1,24 @@
+services:
+  web:
+    build: ./itmanagment/
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/itmanagment
+    ports:
+      - 8000:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=itmanagment.settings
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: POSTGRES
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: itmanagment
+
+volumes:
+  postgres_data:

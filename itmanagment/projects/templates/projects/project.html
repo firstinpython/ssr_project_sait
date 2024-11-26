@@ -1,0 +1,274 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/project.css' %}">
+    <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .visible {
+            display: block;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="menu">
+            <div class="menu-logo">
+                <img src="./assets/svg/logo.png" alt="" class="menu-logo-svg">
+            </div>
+            <div class="menu-buttons">
+                <nav class="menu-buttons-links">
+                    <li class="menu-buttons-link">Clients</li>
+                    <li class="menu-buttons-link">Task manager</li>
+                    <li class="menu-buttons-link">Inbox</li>
+                    <li class="menu-buttons-link">Contacts</li>
+                    <li class="menu-buttons-link"></li>
+                </nav>
+            </div>
+        </div>
+        <div class="page">
+            <header class="page-header">
+                <div class="page-header-container">
+                    <nav class="page-header-menu">
+                        <div class="page-header-search">
+                            <img src="" alt="" class="page-header-searchlogo">
+                            <input type="text" class="page-header-searchinput">
+                        </div>
+                        <div class="page-header-buttons">
+                            <button><img src="./assets//svg/bell.svg" alt="bell" class="page-header-search-bell"></button>
+                            <button><img src="./assets/svg/convert.svg" alt="convert" class="page-header-search-convert"></button>
+                        </div>
+                        <div class="page-header-profile">
+                            <p id="profile-name">Tagir</p>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <main class="page-main">
+                <div class="page-main-links">
+                    <nav>
+                        <li class="page-main-link"></li>
+                        <li class="page-main-link"></li>
+                        <li class="page-main-link"></li>
+                    </nav>
+                </div>
+                <div class="page-main-globtitle" id="project-name">
+                    Project name
+                </div>
+                <div class="page-main-uplabel">
+                    <div class="page-main-date">
+                        <span>Дата</span>
+                    </div>
+                    <div class="page-main-subtitle" id="project-description">
+                        <span>Описание</span>
+                    </div>
+                    <div class="page-main-alltask">
+                        <span>Все таски</span>
+                    </div>
+                </div>
+                <div class="page-main-label">
+                    <div class="task-main-todo">
+                        <div class="task-main-todo-model">
+                            <div class="task-main-todo-titleblock">
+                                <div class="task-main-todo-title">
+                                    To do
+                                </div>
+                                <div class="task-main-todo-add">
+                                    <button id="add-task-button">dv<img src="./assets/svg/plus-circle.svg" alt=""></button>
+                                </div>
+                            </div>
+                            <div class="task-main-todo-items" id="task-main-todo-items">
+                                <!-- Tasks will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-main-inprogres">
+                        <div class="task-main-inprogres-model">
+                            <div class="task-main-inprogres-title">
+                                In progres
+                            </div>
+                            <div class="task-main-inprogres-items" id="task-main-inprogres-items">
+                                <!-- Tasks will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-main-closed">
+                        <div class="task-main-closed-model">
+                            <div class="task-main-closed-title">
+                                Closed
+                            </div>
+                            <div class="task-main-closed-items" id="task-main-closed-items">
+                                <!-- Tasks will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-main-frozen">
+                        <div class="task-main-frozen-model">
+                            <div class="task-main-frozen-title">
+                                Frozen
+                            </div>
+                            <div class="task-main-frozen-items" id="task-main-frozen-items">
+                                <!-- Tasks will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Task Creation Form -->
+    <div id="task-creation-form" class="hidden">
+        <main class="main-label">
+            <div class="main-label-title">
+                Create task
+            </div>
+            <form action="" class="main-label-form" id="task-form">
+                <div class="main-label-input-namediv">
+                    <input type="text" class="main-label-input-nametask" id="name_task" placeholder="Task Name">
+                </div>
+                <div class="main-label-input-descriptdiv">
+                    <input type="text" class="main-label-input-descripttask" id="description_task" placeholder="Description">
+                </div>
+                <div class="main-label-input-projectdiv">
+                    <input type="text" class="main-label-input-projecttask" id="project" placeholder="Project" value="1" readonly>
+                </div>
+                <div class="main-label-input-statusdiv">
+                    <select class="main-label-input-statustask" id="status">
+                        <option value="1">Окончен</option>
+                    </select>
+                </div>
+                <div class="main-label-input-executordiv">
+                    <select class="main-label-input-executortask" id="executor">
+                        <option value="1">Тагир</option>
+                    </select>
+                </div>
+                <div class="main-label-input-prioritydiv">
+                    <select class="main-label-input-prioritytask" id="priority">
+                        <option value="1">Важно</option>
+                    </select>
+                </div>
+                <div class="main-label-input-datedeadlinediv">
+                    <input type="text" class="main-label-input-datedeadlinetask" id="date_of_deadline" placeholder="Deadline">
+                </div>
+                <div class="main-label-input-resptestdiv">
+                    <select class="main-label-input-resptesttask" id="resp_for_testing">
+                        <option value="1">Костя</option>
+                    </select>
+                </div>
+                <button type="submit" class="main-label-button">
+                    Сохранить
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyNTAwMjAyLCJpYXQiOjE3MzI0OTg0MDIsImp0aSI6Ijg0M2RhMGZmYTgzNzRlMDViMmYzZmJlMDVhNzI5ZDRlIiwidXNlcl9pZCI6MX0.vPeyekxnJfHkAuVMO11ynYGXCl_LBLr8JREYs6CPEwo'; // Замените на ваш токен
+            const response = await fetch('http://127.0.0.1:8000/api/v1/{{project_id}}/list_tasks/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            const tasks = data.message;
+
+            document.getElementById('profile-name').innerText = tasks[0].executor.username;
+            document.getElementById('project-name').innerText = tasks[0].project.name_project;
+            document.getElementById('project-description').innerText = tasks[0].project.description_project;
+
+            const taskContainers = {
+                'todo': document.getElementById('task-main-todo-items'),
+                'inprogres': document.getElementById('task-main-inprogres-items'),
+                'closed': document.getElementById('task-main-closed-items'),
+                'frozen': document.getElementById('task-main-frozen-items')
+            };
+
+            tasks.forEach(task => {
+                const status = task.status.name_status;
+                const container = taskContainers[status];
+
+                if (container) {
+                    const taskItem = document.createElement('div');
+                    taskItem.className = 'task-main-todo-item';
+                    taskItem.innerHTML = `
+                        <div class="task-main-todo-titleblock2">
+                            <div class="task-main-todo-ttitle">Title</div>
+                            <div class="task-main-todo-status">${task.name_task}</div>
+                        </div>
+                        <div class="task-main-todo-particpainblock">
+                            <div class="task-main-todo-particpain">Particpaint</div>
+                            <div class="task-main-todo-name">${task.executor.username}</div>
+                        </div>
+                        <div class="task-main-todo-dateaddblock">
+                            <div class="task-main-todo-dateadd">Date add</div>
+                            <div class="task-main-todo-dateadd-text">${task.date_of_deadline}</div>
+                        </div>
+                    `;
+                    container.appendChild(taskItem);
+                }
+            });
+        }
+
+        document.getElementById('add-task-button').addEventListener('click', function() {
+            const taskCreationForm = document.getElementById('task-creation-form');
+            taskCreationForm.classList.toggle('hidden');
+            taskCreationForm.classList.toggle('visible');
+        });
+
+        document.getElementById('task-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyNTAwMjAyLCJpYXQiOjE3MzI0OTg0MDIsImp0aSI6Ijg0M2RhMGZmYTgzNzRlMDViMmYzZmJlMDVhNzI5ZDRlIiwidXNlcl9pZCI6MX0.vPeyekxnJfHkAuVMO11ynYGXCl_LBLr8JREYs6CPEwo'; // Замените на ваш токен
+            const formData = {
+                name_task: document.getElementById('name_task').value,
+                description_task: document.getElementById('description_task').value,
+                project: document.getElementById('project').value,
+                status: document.getElementById('status').value,
+                executor: document.getElementById('executor').value,
+                priority: document.getElementById('priority').value,
+                resp_for_testing: document.getElementById('resp_for_testing').value,
+                date_of_deadline: document.getElementById('date_of_deadline').value
+            };
+
+            const response = await fetch('http://127.0.0.1:8000/api/v1/1/create_task/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert('Task created successfully!');
+                document.getElementById('task-creation-form').classList.add('hidden');
+                document.getElementById('task-creation-form').classList.remove('visible');
+                fetchData(); // Обновляем список задач
+            } else {
+                const errorData = await response.json();
+                alert('Error creating task: ' + JSON.stringify(errorData));
+            }
+        });
+
+        fetchData().catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>

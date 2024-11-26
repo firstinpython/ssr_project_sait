@@ -1,31 +1,32 @@
-from projects.models import ProjectsModel
-def filters(params):
-    model = ProjectsModel.objects.all()
-    methods = ['text',"date_created"]
-    # print(params)
-    my_params = []
-    print(params['alpha'])
-    if params:
+import django_filters
+from tasks.models import TaskModel
 
-        if params['time'] == "new-old":
-            my_params.append("date_of_creation")
-        elif params['time'] == 'old-new':
-            my_params.append("-date_of_creation")
-        if params['alpha'] == "а-я":
-            my_params.append("name_task")
-        elif params['alpha'] == "я-а":
-            my_params.append("-name_task")
-        print(*my_params)
-        model = ProjectsModel.objects.order_by(*my_params)
-        return model
-    else:
-        return model
+class TaskFilter(django_filters.FilterSet):
+    status = django_filters.CharFilter(field_name='status__name_status', lookup_expr='icontains')
+    priority = django_filters.CharFilter(field_name='priority__name_priority', lookup_expr='icontains')
+    executor = django_filters.CharFilter(field_name='executor__username', lookup_expr='icontains')
+    created_from = django_filters.DateFilter(field_name='date_of_creation', lookup_expr='gte')
+    created_to = django_filters.DateFilter(field_name='date_of_creation', lookup_expr='lte')
+    updated_from = django_filters.DateFilter(field_name='date_of_update', lookup_expr='gte')
+    updated_to = django_filters.DateFilter(field_name='date_of_update', lookup_expr='lte')
+    deadline_from = django_filters.DateFilter(field_name='date_of_deadline', lookup_expr='gte')
+    deadline_to = django_filters.DateFilter(field_name='date_of_deadline', lookup_expr='lte')
+    sort_by = django_filters.OrderingFilter(
+        fields=(
+            ('name_task', 'name_task'),
+            ('date_of_creation', 'date_of_creation'),
+            ('date_of_update', 'date_of_update'),
+        ),
+        field_labels={
+            'name_task': 'Название задачи (от А до Я)',
+            '-name_task': 'Название задачи (от Я до А)',
+            'date_of_creation': 'Дата создания (от старых к новым)',
+            '-date_of_creation': 'Дата создания (от новых к старым)',
+            'date_of_update': 'Дата обновления (от старых к новым)',
+            '-date_of_update': 'Дата обновления (от новых к старым)',
+        }
+    )
 
-#сортировка по проектам по: времени создания\обновления (от старых к новым и наоборот)
-#по названию от а-я
-#возможность фильтрации задач
-#от и до (созданные обнавленные срок и выполнение от 00.00.2000 до 00.00.2001)
-
-#---------
-#по дате создания/обновления (от старых к новым и от новых к старым)
-#по названию (от а до я)
+    class Meta:
+        model = TaskModel
+        fields = ['status', 'priority', 'executor', 'created_from', 'created_to', 'updated_from', 'updated_to', 'deadline_from', 'deadline_to']

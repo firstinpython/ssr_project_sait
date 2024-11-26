@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static /css/main-page.css %}">
+    <title>Document</title>
+
+</head>
+<body>
+    <div class="page-container">
+        <div class="menu">
+            <div class="menu-logo">
+                <img src="./assets/svg/logo.png" alt="" class="menu-logo-svg">
+            </div>
+            <div class="menu-buttons">
+                <nav class="menu-buttons-links">
+                    <li class="menu-buttons-link">Clients</li>
+                    <li class="menu-buttons-link">Task manager</li>
+                    <li class="menu-buttons-link">Inbox</li>
+                    <li class="menu-buttons-link">Contacts</li>
+                    <li class="menu-buttons-link"></li>
+                </nav>
+            </div>
+        </div>
+        <div class="page">
+        <header class="page-header">
+            <div class="page-header-container">
+                <nav class="page-header-menu">
+                        <div class="page-header-search">
+                            <img src="" alt="" class="page-header-searchlogo">
+                            <input type="text" class="page-header-searchinput">
+                        </div>
+                        <div class="page-header-buttons">
+                                <button><img src="./assets//svg/bell.svg" alt="bell" class="page-header-search-bell"></button>
+                                <button><img src="./assets/svg/convert.svg" alt="convert" class="page-header-search-convert"></button>
+                        </div>
+                        <div class="page-header-profile">
+                            <p>Tagir</p>
+                        </div>
+                </nav>
+            </div>
+        </header>
+        <main class="page-main">
+            <div class="page-main-links">
+                <nav>
+                    <li class="page-main-link"></li>
+                    <li class="page-main-link"></li>
+                    <li class="page-main-link"></li>
+                </nav>
+            </div>
+
+            <div class="page-main-blocks">
+                <div class="page-main-actions">
+                    <div class="page-main-title">
+                        Task name
+                    </div>
+                    <div class="actions-block">
+                        <h2>CRM system design</h2>
+                        <p>Activity: 12/04/2021</p>
+                        <p>Приступил к задаче</p>
+                        <p>Tagir</p>
+                    </div>
+                    <div class="actions-block">
+                        <h2>CRM system design</h2>
+                        <p>Activity: 12/04/2021</p>
+                        <p>Приступил к задаче</p>
+                        <p>Tagir</p>
+                    </div>
+                    <div class="actions-block">
+                        <h2>CRM system design</h2>
+                        <p>Activity: 12/04/2021</p>
+                        <p>Приступил к задаче</p>
+                        <p>Tagir</p>
+                    </div>
+                </div>
+                <div class="page-main-comments">
+                    <div class="page-main-comments-text">
+                        Добавть статистику о чем то
+                    </div>
+                    <div class="page-main-comments-text-input">
+                        <input type="text" class="text-input" placeholder="Комментарий...">
+                        <button class ="page-main-but">
+                            Опубликовать
+                        </button>
+                    </div>
+                    <div class="page-main-comments-comment">
+                        <div class="comment-name">
+                            Тагир
+                        </div>
+                        <div class="comment-text">
+                            1.Добавлены че то там
+                        </div>
+                    </div>
+                </div>
+                <div class="page-main-panel">
+                    <div class="page-main-desk">
+                        <span>Priority</span>
+                        <span>Status</span>
+                        <span>Date added</span>
+                        <span>Deadline</span>
+                    </div>
+                    <div class="page-main-but-changepriority">
+                        Change the priority
+                    </div>
+                    <button class="page-main-but-changetask">
+                        <p>Change the task</p>
+                    </button>
+                    <button class="page-main-becomeparticant">
+                        <p>Become a particant</p>
+                    </button>
+                    <button class="page-main-freezetask">
+                        <p>Freeze the task</p>
+                    </button>
+                    <button class="page-main-close-task">
+                        <p>Close task</p>
+                    </button>
+                </div>
+            </div>
+        </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,342 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button, input[type=submit], input[type=reset] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+li {
+  list-style-type: none;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  width: 376px;
+  height: 1100px;
+  background-color: #F8F8FB;
+  display: flex;
+  flex-direction: column;
+  gap: 112px;
+  padding-top: 123px;
+  align-items: center;
+}
+
+.page-header-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.page-header-searchinput {
+  width: 1057px;
+  height: 30px;
+  border-radius: 101px;
+}
+
+.page-main {
+  display: flex;
+  flex-direction: column;
+}
+.page-main-blocks {
+  display: flex;
+  flex-direction: row;
+  margin-right: 115px;
+  width: 680px;
+  height: 503px;
+}
+.page-main-actions {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  background-color: #F6F6F6;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+}
+.page-main-title {
+  padding-top: 22px;
+  padding-bottom: 35px;
+}
+
+.actions-block {
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+  height: 158px;
+  border-radius: 10px;
+  background-color: #E0E4EA;
+  margin-bottom: 10px;
+  padding-left: 22px;
+  padding-top: 15px;
+}
+
+.page-main-comments {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.page-main-comments-text {
+  width: 680px;
+  height: 120px;
+  background-color: #F6F6F6;
+  padding-left: 22px;
+  padding-top: 22px;
+  border-radius: 17px;
+}
+.page-main-comments-text-input {
+  margin-top: 16px;
+  width: 700px;
+  height: 217px;
+  background-color: #F6F6F6;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+}
+.page-main-comments-comment {
+  width: 680px;
+  height: 134px;
+  border-radius: 17px;
+  background-color: #F6F6F6;
+  margin-top: 16px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.text-input {
+  width: 636px;
+  height: 115px;
+  background-color: #E0E4EA;
+  margin-left: 22px;
+  margin-top: 22px;
+  border-radius: 17px;
+}
+
+.page-main-panel {
+  margin-left: 10px;
+}
+
+.page-main-freezetask {
+  width: 324px;
+  height: 56px;
+  background-color: greenyellow;
+  border-radius: 17px;
+  align-items: center;
+  display: flex;
+}
+
+.page-main-becomeparticant {
+  width: 324px;
+  height: 56px;
+  background-color: #67CB65;
+  border-radius: 17px;
+  align-items: center;
+  display: flex;
+}
+
+.page-main-but-changetask {
+  width: 324px;
+  height: 56px;
+  background-color: #F6F6F6;
+  border-radius: 17px;
+  align-items: center;
+  display: flex;
+}
+
+.page-main-panel {
+  display: flex;
+  flex-direction: column;
+  width: 324px;
+  height: 536px;
+  gap: 16px;
+}
+
+.page-main-desk {
+  display: flex;
+  flex-direction: column;
+  height: 176px;
+  padding-left: 22px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  background-color: #F6F6F6;
+}
+
+.page-main-but-changepriority {
+  width: 324px;
+  height: 56px;
+  background-color: #F6F6F6;
+  border-radius: 17px;
+}
+
+.page-main-close-task {
+  width: 324px;
+  height: 56px;
+  background-color: #E74444;
+  border-radius: 17px;
+}
+
+.profile-main {
+  margin-left: 82px;
+}
+.profile-main-name {
+  margin-top: 79px;
+  margin-bottom: 30px;
+}
+.profile-main-photo {
+  width: 411px;
+  height: 411px;
+}
+.profile-main-peoplestat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.profile-main-blocks-container {
+  display: flex;
+  flex-direction: row;
+  gap: 39px;
+}
+.profile-main-projects-container {
+  display: flex;
+  flex-direction: column;
+}
+.profile-main-clpr-projects {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+.profile-main-proff {
+  width: 411px;
+  height: 120px;
+  background-color: #F6F6F6;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.profile-main-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-main-projects {
+  display: flex;
+  flex-direction: column;
+  width: 924px;
+  height: 330px;
+  background-color: #F6F6F6;
+  border-radius: 17px;
+  padding-left: 22px;
+}
+.profile-main-projects-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.profile-main-projects-title {
+  padding-top: 22px;
+  padding-bottom: 31px;
+}
+.profile-main-projects-item {
+  display: flex;
+  flex-direction: row;
+  width: 880px;
+  height: 66px;
+  border-radius: 17px;
+  background-color: #E0E4EA;
+}
+
+.profile-main-progresproject {
+  display: flex;
+  flex-direction: column;
+  background-color: #F6F6F6;
+  width: 447px;
+  height: 389px;
+  border-radius: 17px;
+  margin-top: 24px;
+}
+.profile-main-progresproject-block {
+  display: flex;
+  flex-direction: column;
+  padding-left: 19px;
+  gap: 16px;
+}
+.profile-main-progresproject-titlelabel {
+  display: flex;
+  flex-direction: row;
+}
+.profile-main-progresproject-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #E0E4EA;
+  border-radius: 17px;
+  width: 409px;
+  height: 115px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.profile-main-progresproject-particants {
+  display: flex;
+  flex-direction: row;
+}
+.profile-main-progresproject-dateadd {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-main-closeproject {
+  display: flex;
+  flex-direction: column;
+  background-color: #F6F6F6;
+  width: 447px;
+  height: 389px;
+  border-radius: 17px;
+  margin-top: 24px;
+}
+.profile-main-closeproject-ttitle {
+  padding-left: 19px;
+}
+.profile-main-closeproject-block {
+  display: flex;
+  flex-direction: column;
+  padding-left: 19px;
+  gap: 16px;
+}
+.profile-main-closeproject-titlelabel {
+  display: flex;
+  flex-direction: row;
+}
+.profile-main-closeproject-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #E0E4EA;
+  border-radius: 17px;
+  width: 409px;
+  height: 115px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.profile-main-closeproject-particants {
+  display: flex;
+  flex-direction: row;
+}
+.profile-main-closeproject-dateadd {
+  display: flex;
+  flex-direction: row;
+}

@@ -62,3 +62,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'message': message
         }, ensure_ascii=False))
+
+    async def add_comments(self,event):
+        message = event['message']
+        await self.send(text_data=json.dumps({
+            'message':message
+        }, ensure_ascii=False))

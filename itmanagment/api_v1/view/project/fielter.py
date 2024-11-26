@@ -1,31 +1,23 @@
+import django_filters
 from projects.models import ProjectsModel
-def filters(params):
-    model = ProjectsModel.objects.all()
-    methods = ['text',"date_created"]
-    # print(params)
-    my_params = []
-    print(params['alpha'])
-    if params:
 
-        if params['time'] == "new-old":
-            my_params.append("date_of_creation")
-        elif params['time'] == 'old-new':
-            my_params.append("-date_of_creation")
-        if params['alpha'] == "а-я":
-            my_params.append("name_project")
-        elif params['alpha'] == "я-а":
-            my_params.append("-name_project")
-        print(*my_params)
-        model = ProjectsModel.objects.order_by(*my_params)
-        return model
-    else:
-        return model
+class ProjectsFilter(django_filters.FilterSet):
+    name_project = django_filters.CharFilter(lookup_expr='icontains')
+    created_from = django_filters.DateFilter(field_name='date_of_creation', lookup_expr='gte')
+    created_to = django_filters.DateFilter(field_name='date_of_creation', lookup_expr='lte')
+    sort_by = django_filters.OrderingFilter(
+        fields=(
+            ('name_project', 'name_project'),
+            ('date_of_creation', 'date_of_creation'),
+        ),
+        field_labels={
+            'name_project': 'Название проекта (от А до Я)',
+            '-name_project': 'Название проекта (от Я до А)',
+            'date_of_creation': 'Дата создания (от старых к новым)',
+            '-date_of_creation': 'Дата создания (от новых к старым)',
+        }
+    )
 
-#сортировка по проектам по: времени создания\обновления (от старых к новым и наоборот)
-#по названию от а-я
-#возможность фильтрации задач
-#от и до (созданные обнавленные срок и выполнение от 00.00.2000 до 00.00.2001)
-
-#---------
-#по дате создания/обновления (от старых к новым и от новых к старым)
-#по названию (от а до я)
+    class Meta:
+        model = ProjectsModel
+        fields = ['name_project', 'created_from', 'created_to']

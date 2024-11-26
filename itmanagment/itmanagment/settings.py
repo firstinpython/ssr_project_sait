@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_filters",
     "tasks",
     "api_v1",
+    'drf_yasg',
 
 ]
 
@@ -88,8 +89,12 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'itmanagment',
+        'USER':'postgres',
+        'PASSWORD':"qwerty",
+        "HOST":"localhost",
+        "PORT":"5432"
     }
 }
 
@@ -147,7 +152,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
@@ -191,3 +196,7 @@ EMAIL_HOST_USER = "testt3stick@yandex.ru"
 EMAIL_HOST_PASSWORD = "kgdtqgfjstpavjll"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]

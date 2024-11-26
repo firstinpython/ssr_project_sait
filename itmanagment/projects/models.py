@@ -14,6 +14,7 @@ class ProjectsModel(models.Model):
     date_of_update = models.DateField(verbose_name="date_update", auto_now_add=True)
     status = models.ForeignKey(verbose_name="status", to="StatusModel", on_delete=models.CASCADE)
     users = models.ManyToManyField(verbose_name="users",to=UsersModel)
+    slug_name = models.SlugField(verbose_name="slug",null=True)
 
     def __str__(self):
         return f"{self.pk}|{self.name_project}"
