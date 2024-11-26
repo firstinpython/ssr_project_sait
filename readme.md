@@ -1,110 +1,102 @@
-## Структура проекта
-[Общая структура](#общая-структура)\
-[Система управления парком автомобилей](#система-управления-парком-автомобилей)\
-[Система оплаты услуг](#система-оплаты-услуг)\
-[Автомобиль](#автомобиль)\
-[Мобильное приложение клиента](#мобильное-приложение-клиента)
+# API
+Установка и запуск проекта
+1. Клонирование репозитория
+Сначала склонируйте репозиторий на свой локальный компьютер:
 
-### Общая структура
+bash
+Copy
+git clone https://github.com/yourusername/task-management-system.git
+cd task-management-system
+2. Создание виртуального окружения
+Создайте и активируйте виртуальное окружение:
 
-project/
-│── module/ **Название модуля** \
-│ │── config/ **Содержит файл с зависимостями которые используются в проекте**\
-│ └── requirements.txt\
-│ │── data/ **Данные используемые в модуле, наличие по необходимости (может быть instance, в случае использования БД)** \
-│ │ └── data.json\
-│ │── src/ **Основной код модуля**\
-│ │ ├── \_\_init\_\_.py **Инициализация приложения (стандартный для всех модулей)** \
-│ │ └── main.py **Код приложения** \
-│ │── Dockerfile **Сборка образа (стандартный для всех модулей, по необходимости вносяться изменения)** \
-└─── start.py **Запуск модуля**
+bash
+Copy
+python3 -m venv venv
+source venv/bin/activate  # Для Linux/MacOS
+# или
+venv\Scripts\activate  # Для Windows
+3. Установка зависимостей
+Установите необходимые зависимости:
 
-Перед запуском настроить среду для разработки:
+bash
+Copy
+pip install -r requirements.txt
+4. Настройка базы данных
+Создайте и примените миграции:
 
-```make dev_install```
+bash
+Copy
+python manage.py makemigrations
+python manage.py migrate
+5. Создание суперпользователя
+Создайте суперпользователя для доступа к административной панели:
 
-Пример запуска:
+bash
+Copy
+python manage.py createsuperuser
+6. Запуск сервера
+Запустите сервер разработки Django:
 
-```python3 module/start.py```
+bash
+Copy
+python manage.py runserver
+Теперь вы можете открыть браузер и перейти по адресу http://127.0.0.1:8000/ для доступа к приложению.
 
-Важно! При локальном запуске (не в Docker образе) заменить URL на localhost и так же порт
+Доступные URL-адреса
+Swagger и Redoc
+Swagger JSON: http://127.0.0.1:8000/swagger.json/
 
-Пример:
+Swagger UI: http://127.0.0.1:8000/swagger/
 
-```MANAGMENT_URL = 'http://management_system:8000'``` на ```MANAGMENT_URL = 'http://0.0.0.0:8001'```
+Redoc UI: http://127.0.0.1:8000/redoc/
 
-### Система управления парком автомобилей
+# Пользователи
+Список пользователей: http://127.0.0.1:8000/users/
 
-#### cars
+Создание пользователя: http://127.0.0.1:8000/create_user/
 
-Программный имитатор управления парком автомобилей, содержит простую базу данных для хранения данных клиента
+Профиль пользователя: http://127.0.0.1:8000/user_profile/
 
-### API
+# Проекты
+Создание проекта: http://127.0.0.1:8000/create_project/
 
-#### URL http://0.0.0.0:8003
+Добавление пользователей в проект: http://127.0.0.1:8000/<int:project_id>/addproject/
 
-|Название метода|Тип запроса|Входные параметры|Ответ (успешный)|Описание|
-|:--|:--|:--|:--|:--|
-|/cars|GET||list[string]|Опрашивает доступные автомобили и отдаёт список свободных автомобилей|
-|/tariff|GET||list[string]|Отдает список тарифов|
-|/telemetry/<string:brand>|POST|Имя автомобиля||Функция для получения телеметрии от автомобилей во время поездки|
-|/access/<string:name>|POST|Имя клиента|{'access': bool, 'tariff': string, 'car': string}| Проверка доступа клиента до автомобиля|
-|/confirm_prepayment/<string:name>|POST|Имя клиента||Фукнция получения потверждений об оплате предоплаты клиента от системы оплаты услуг|
-|/confirm_payment/<string:name>|POST|Имя клиента|{'car': string, 'name': string, 'final_amount': int,'created_at': time, 'elapsed_time': int, 'tarif': string}|Фукнция получения потверждений об оплате поездки клиента от системы оплаты услуг, формирует финальный чек о поездке и передаёт клиенту|
-|/select/car/<string:brand>|POST|{'client_name': string, 'experience': int, 'tariff': string}|{'id': int, 'amount': int, 'client_id': int, 'status': string}|Бронирование и рассчет предоплаты в зависимости от функций автомобиля|
-|/return/<string:name>|POST|Имя клиента|{'id': int, 'amount': int, 'status': string, 'client_id': int}|Рассчёт стоимости всей поездки в зависимости от опыта и тарифа, создание оплаты. Получает запрос от автомобиля|
+Список проектов: http://127.0.0.1:8000/list_projects/
 
-|Название|Тип|
-|:--|:--|
-|/get|{'string':''}|
-### Система оплаты услуг
+Обновление проекта: http://127.0.0.1:8000/<str:project_slug>/update_project
 
-#### payment-system
+Удаление проекта: http://127.0.0.1:8000/<int:project_id>/delete
 
-Программный имитатор банковской системы, содержит базу данных для сохранения операций клиента
+# Задачи
+Создание задачи: http://127.0.0.1:8000/<int:project_id>/create_task/
 
-### API
+Список задач: http://127.0.0.1:8000/<int:project_id>/list_tasks/
 
-#### URL http://127.0.0.1:8000/api/v1
-### Users
+Удаление задачи: http://127.0.0.1:8000/<int:project_id>/<int:task_id>/delete/
 
-| Название метода                            | Тип запроса | Входные параметры                                                                                                                                 | Ответ (успешный)                                                                                                                                                                                                                                                                                                                                                                                 |Описание|
-|:-------------------------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--|
-| /users/                                    | GET         | str                                                                                                                                               | {'id': int, 'name': string}                                                                                                                                                                                                                                                                                                                                                                      |Создает или отдаёт клиента если он существует в базе системы оплаты услуг|
-| /create_user/                              | POST        | {"username":str,"first_name":str,"last_name":str,"email":str,"age":int,"role":int,"profession_category":int,"dev_stack":list[int],"password":str} | status 200                                                                                                                                                                                                                                                                                                                                                                                       |Получение по ИД (системы оплаты услуг) клиента|
-| /profile/                                  | GET         | str                                                                                                                                               | {"user_profile": {"username": str,"first_name": str,"last_name": str,"email": str,"age": int,"role": {"name_role": str},"profession_category": {"name_prof_category": str},"dev_stack": [{"user_stack": str}]},"projects": [{"name_project": str,"status": {"name_status": str,}}]}                                                                                                              |Получение всех неоплаченных счётов клиента|
+Обновление задачи: http://127.0.0.1:8000/<str:project_slug>/<str:task_slug>/update_task/
 
+Обновление комментария: http://127.0.0.1:8000/<str:project_slug>/<str:task_slug>/<str:comment_slug>/
 
+# Комментарии
+Создание комментария: http://127.0.0.1:8000/<int:project_id>/create_comment
 
-### Projects
+Список комментариев: http://127.0.0.1:8000/<int:project_id>/<int:task_id>/lists_comments/
 
-| Название метода                     | Тип запроса | Входные параметры |Ответ (успешный)|Описание|
-|:------------------------------------|:------------|:------------------|:--|:--|
-| /create_project/                    | POST        | str               |[{"brand": string,"is_running": bool,"speed": int,"coordinates": (int, int), "occupied_by": string, "trip_time": int, "has_air_conditioner": bool, "has_heater": bool, "has_navigator": bool, "tariff ": string}]|Возвращает все статусы автомобилей|
-| /<int:project_id>/addproject/       | POST        | Имя автомобиля    |string|Запуск автомобиля|
-| /list_projects/                     | GET         | Имя автомобиля    |string|Остановка автомобиля|
-| /<str:project_slug>/update_project/ | PUT         | Имя автомобиля    |{"brand": string,"is_running": bool,"speed": int,"coordinates": (int, int), "occupied_by": string, "trip_time": int, "has_air_conditioner": bool, "has_heater": bool, "has_navigator": bool, "tariff ": string}|Получени статуса автомобиля|
-| /<int:project_id>/delete/           | DELETE      | Имя клиента       |string|Арендовать автомобиль|
+Удаление комментария: http://127.0.0.1:8000/<str:project_slug>/<str:task_slug>/<str:comment_slug>/delete_comment/
 
+# JWT-токены
+Получение токена: http://127.0.0.1:8000/api/token/
 
+Обновление токена: http://127.0.0.1:8000/api/token/refresh/
 
-### Tasks
+Проверка токена: http://127.0.0.1:8000/api/token/verify/
 
-|Название метода|Тип запроса|Входные параметры|Ответ (успешный)|Описание|
-|:--|:--|:--|:--|:--|
-|/cars|POST|{"name": string, "experience": int}|{'id': int, 'amount': int, 'client_id': int, 'status': string}|Выбор автомобиля из свободных, выбор тарифа и получение счёта для оплаты предоплаты|
-|/start_drive|POST|{name: string}|string|Начало поездки, проверка доступа до автомобиля|
-|/stop_drive|POST|{name: string}|{'id': int, 'amount': int, 'status': string, 'client_id': int}|Окончание поездки, возвращение автомобиля. Так же присылается итоговая оплата поездки в зависимости от тарифа|
-|/prepayment|POST|{'id': int, 'amount': int, 'client_id': int, 'status': string}|{'invoice_id': int}|Оплата предоплаты|
-|/final_pay|POST|{'invoice_id': int}|{'car': string, 'name': string, 'final_amount': int,'created_at': time, 'elapsed_time': int, 'tarif': string}|Оплата поездки и получение финального чека|
+# Тестирование
+Для запуска тестов используйте следующую команду:
 
-
-### Comments
-
-|Название метода|Тип запроса|Входные параметры|Ответ (успешный)|Описание|
-|:--|:--|:--|:--|:--|
-|/cars|POST|{"name": string, "experience": int}|{'id': int, 'amount': int, 'client_id': int, 'status': string}|Выбор автомобиля из свободных, выбор тарифа и получение счёта для оплаты предоплаты|
-|/start_drive|POST|{name: string}|string|Начало поездки, проверка доступа до автомобиля|
-|/stop_drive|POST|{name: string}|{'id': int, 'amount': int, 'status': string, 'client_id': int}|Окончание поездки, возвращение автомобиля. Так же присылается итоговая оплата поездки в зависимости от тарифа|
-|/prepayment|POST|{'id': int, 'amount': int, 'client_id': int, 'status': string}|{'invoice_id': int}|Оплата предоплаты|
-|/final_pay|POST|{'invoice_id': int}|{'car': string, 'name': string, 'final_amount': int,'created_at': time, 'elapsed_time': int, 'tarif': string}|Оплата поездки и получение финального чека|
+bash
+Copy
+python manage.py test
